@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: deploy-kit-app
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: deploy-kit-app
+    app.kubernetes.io/part-of: deploy-kit
+  finalizers:
+    # Cascade deletion: Argo CD will delete managed resources when the Application is deleted.
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/chirag127/deploy-kit.git
+    targetRevision: HEAD
+    # Use Kustomize overlay for the target environment.
+    # Switch to 'k8s/overlays/prod' for production.
+    path: k8s/overlays/dev
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: deploy-kit
+
+  syncPolicy:
+    automated:
+      # Automatically deploy when the repo changes.
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
+  revisionHistoryLimit: 5

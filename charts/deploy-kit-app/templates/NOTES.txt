@@ -1,0 +1,2 @@
+app: deploy-kit-app
+image: ghcr.io/chirag127/deploy-kit-app:latest

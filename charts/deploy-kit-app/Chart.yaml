@@ -1,0 +1,14 @@
+apiVersion: v2
+name: deploy-kit-app
+description: Helm chart for the deploy-kit sample FastAPI service
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+keywords:
+  - fastapi
+  - kubernetes
+  - deploy-kit
+home: https://github.com/chirag127/deploy-kit
+maintainers:
+  - name: Chirag Singhal
+    url: https://github.com/chirag127

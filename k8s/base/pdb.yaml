@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: deploy-kit-app
+  namespace: deploy-kit
+  labels:
+    app.kubernetes.io/name: deploy-kit-app
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: deploy-kit-app

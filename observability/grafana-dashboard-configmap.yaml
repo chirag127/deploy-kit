@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  deploy-kit-app.json: |
+    # Inline the dashboard JSON here, or mount it via a separate volume.
+    # See observability/grafana-dashboard.json for the full definition.
+    # In production: use Grafana's API or the dashboard sidecar mechanism:
+    #   https://github.com/grafana/helm-charts/blob/main/charts/grafana/README.md#sidecar-for-dashboards

@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: deploy-kit-app
+  namespace: deploy-kit
+  labels:
+    app.kubernetes.io/name: deploy-kit-app
+    # Must match the Prometheus operator's serviceMonitorSelector
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: deploy-kit-app
+  namespaceSelector:
+    matchNames:
+      - deploy-kit
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
+      scrapeTimeout: 10s

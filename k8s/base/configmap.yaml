@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deploy-kit-app
+  namespace: deploy-kit
+  labels:
+    app.kubernetes.io/name: deploy-kit-app
+    app.kubernetes.io/component: config
+data:
+  APP_NAME: "deploy-kit-app"
+  ENV: "base"
+  PORT: "8080"

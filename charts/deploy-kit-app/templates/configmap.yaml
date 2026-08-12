@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "deploy-kit-app.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "deploy-kit-app.labels" . | nindent 4 }}
+data:
+  APP_NAME: {{ .Values.config.APP_NAME | quote }}
+  ENV: {{ .Values.config.ENV | quote }}
+  PORT: {{ .Values.config.PORT | quote }}
