@@ -105,7 +105,7 @@ jobs:
       - name: yamllint
         run: |
           yamllint -d '{extends: relaxed, rules: {line-length: {max: 120}}}' \
-            k8s/ charts/ gitops/ observability/
+            k8s/ gitops/ observability/ charts/deploy-kit-app/Chart.yaml charts/deploy-kit-app/values.yaml
 
   docker:
     name: docker build
